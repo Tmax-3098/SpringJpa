@@ -1,9 +1,6 @@
 package com.saturn.springJpa.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,12 +16,23 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(
+        name="product_table",
+        uniqueConstraints = {
+                @UniqueConstraint(name = "brand_unique", columnNames = {"brand"}),
+                @UniqueConstraint(name = "brand_item_unique", columnNames = {"brand", "item"})
+        },
+        indexes = {
+                @Index(name = "brand_idx", columnList = "brand")
+        }
+)
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String brand;
 
     private String item;
