@@ -1,10 +1,7 @@
 package com.saturn.springJpa.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -12,14 +9,14 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Table(
         name="product_table",
         uniqueConstraints = {
-                @UniqueConstraint(name = "brand_unique", columnNames = {"brand"}),
+                //@UniqueConstraint(name = "brand_unique", columnNames = {"brand"}),
                 @UniqueConstraint(name = "brand_item_unique", columnNames = {"brand", "item"})
         },
         indexes = {
